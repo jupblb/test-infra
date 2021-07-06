@@ -54,7 +54,7 @@ periodics:
 
 # This is a sig-release-master-blocking job.
 - cron: '1 17 * * *' # Run daily at 9:01PST (17:01 UTC)
-  name: ci-kubernetes-e2e-gce-scale-performance
+  name: ci-kubernetes-e2e-gce-scale-performance-jupblb
   tags:
   - "perfDashPrefix: gce-5000Nodes"
   - "perfDashBuildsCount: 270"
@@ -74,15 +74,10 @@ periodics:
     repo: kubernetes
     base_ref: master
     path_alias: k8s.io/kubernetes
-  - org: kubernetes
+  - org: jupblb
     repo: perf-tests
-    base_ref: master
+    base_ref: huge-service-parallel
     path_alias: k8s.io/perf-tests
-  annotations:
-    testgrid-alert-email: kubernetes-sig-scale@googlegroups.com, kubernetes-scalability-tickets@google.com, release-team@kubernetes.io
-    testgrid-dashboards: sig-release-master-informing, sig-scalability-gce, google-gce
-    testgrid-tab-name: gce-master-scale-performance
-    description: "Uses kubetest to run k8s.io/perf-tests/run-e2e.sh against a 5000-node cluster created with cluster/kube-up.sh"
   spec:
     containers:
     - image: gcr.io/k8s-testimages/kubekins-e2e:v20210615-c973edd-master
@@ -98,7 +93,7 @@ periodics:
       - --extract=ci/latest-fast
       - --extract-ci-bucket=k8s-release-dev
       - --gcp-nodes=5000
-      - --gcp-project=kubernetes-scale
+      - --gcp-project=gke-scalability-cluster-15k-1
       - --gcp-zone=us-east1-b
       - --provider=gce
       - --metadata-sources=cl2-metadata.json
