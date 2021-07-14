@@ -168,6 +168,7 @@ periodics:
       - --kubemark-nodes=100
       - --provider=gce
       - --metadata-sources=cl2-metadata.json
+      - --env=CL2_ENABLE_HUGE_SERVICES=true
       - --test=false
       - --test_args=--ginkgo.focus=xxxx
       - --test-cmd=$GOPATH/src/k8s.io/perf-tests/run-e2e.sh
@@ -244,6 +245,7 @@ periodics:
       - --kubemark-nodes=100
       - --provider=gce
       - --metadata-sources=cl2-metadata.json
+      - --env=CL2_ENABLE_HUGE_SERVICES=true
       - --test=false
       - --test_args=--ginkgo.focus=xxxx
       - --test-cmd=$GOPATH/src/k8s.io/perf-tests/run-e2e.sh
@@ -318,6 +320,7 @@ periodics:
       - --kubemark
       - --kubemark-nodes=100
       - --provider=gce
+      - --env=CL2_ENABLE_HUGE_SERVICES=true
       - --metadata-sources=cl2-metadata.json
       - --env=CONTROLLER_MANAGER_TEST_ARGS=--profiling --kube-api-qps=300 --kube-api-burst=300
       - --env=SCHEDULER_TEST_ARGS=--profiling --kube-api-qps=300 --kube-api-burst=300
@@ -400,6 +403,7 @@ periodics:
       - --kubemark-nodes=500
       - --metadata-sources=cl2-metadata.json
       - --provider=gce
+      - --env=CL2_ENABLE_HUGE_SERVICES=true
       - --test=false
       - --test_args=--ginkgo.focus=xxxx
       - --test-cmd=$GOPATH/src/k8s.io/perf-tests/run-e2e.sh
@@ -478,6 +482,8 @@ periodics:
       - --kubemark-nodes=5000
       - --provider=gce
       - --metadata-sources=cl2-metadata.json
+      - --env=CL2_ENABLE_HUGE_SERVICES=true
+      - --env=CL2_ENABLE_HUGE_SERVICES_MULTIPLE_REPLICAS=true
       - --test=false
       - --test_args=--ginkgo.focus=xxxx
       - --test-cmd=$GOPATH/src/k8s.io/perf-tests/run-e2e.sh
@@ -561,6 +567,8 @@ periodics:
       - --kubemark-nodes=5000
       - --provider=gce
       - --metadata-sources=cl2-metadata.json
+      - --env=CL2_ENABLE_HUGE_SERVICES=true
+      - --env=CL2_ENABLE_HUGE_SERVICES_MULTIPLE_REPLICAS=true
       - --test=false
       - --test_args=--ginkgo.focus=xxxx
       - --test-cmd=$GOPATH/src/k8s.io/perf-tests/run-e2e.sh
@@ -634,6 +642,7 @@ periodics:
       - --kubemark-nodes=600
       - --provider=gce
       - --metadata-sources=cl2-metadata.json
+      - --env=CL2_ENABLE_HUGE_SERVICES=true
       - --test=false
       - --test_args=--ginkgo.focus=xxxx
       - --test-cmd=$GOPATH/src/k8s.io/perf-tests/run-e2e.sh
