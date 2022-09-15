@@ -354,11 +354,7 @@ periodics:
           cpu: 2
           memory: "2Gi"
 
-- name: ci-kubernetes-kubemark-500-gce
-  cluster: k8s-infra-prow-build
-  tags:
-  - "perfDashPrefix: kubemark-500Nodes"
-  - "perfDashJobType: performance"
+- name: ci-kubernetes-kubemark-500-gce-jupblb
   interval: 1h
   labels:
     preset-service-account: "true"
@@ -371,23 +367,14 @@ periodics:
   decoration_config:
     timeout: 120m
   extra_refs:
-  - org: kubernetes
+  - org: jupblb
     repo: kubernetes
-    base_ref: master
+    base_ref: b245915126
     path_alias: k8s.io/kubernetes
   - org: kubernetes
     repo: perf-tests
     base_ref: master
     path_alias: k8s.io/perf-tests
-  annotations:
-    fork-per-release: "true"
-    fork-per-release-cron: 0 3 * * *, 0 9 * * *, 0 15 * * *, 0 21 * * *
-    fork-per-release-deletions: "preset-e2e-scalability-periodics-master"
-    fork-per-release-replacements: "kubemark-500Nodes -> kubemark-500Nodes-{{.Version}}, extract=ci/latest -> extract=ci/latest-{{.Version}}, gcp-project=k8s-jenkins-blocking-kubemark -> gcp-project-type=scalability-project, us-central1-f -> us-east1-b"
-    testgrid-alert-email: kubernetes-sig-scale@googlegroups.com, kubernetes-scalability-tickets@google.com
-    testgrid-dashboards: sig-scalability-kubemark
-    testgrid-tab-name: kubemark-master-500
-    testgrid-num-failures-to-alert: '2'
   spec:
     containers:
     - image: gcr.io/k8s-staging-test-infra/kubekins-e2e:v20220908-70b61d242b-master
@@ -401,7 +388,7 @@ periodics:
       - --gcp-node-image=gci
       - --gcp-node-size=e2-standard-8
       - --gcp-nodes=8
-      - --gcp-project-type=scalability-project
+      - --gcp-project-type=gke-scalability-100-project
       - --gcp-zone=us-central1-f
       - --kubemark
       - --kubemark-nodes=500
@@ -422,8 +409,6 @@ periodics:
       - --test-cmd-args=--testoverrides=./testing/overrides/kubemark_500_nodes.yaml
       - --test-cmd-name=ClusterLoaderV2
       - --timeout=100m
-      - --use-logexporter
-      - --logexporter-gcs-path=gs://k8s-infra-scalability-tests-logs/$(JOB_NAME)/$(BUILD_ID)
       # docker-in-docker needs privilged mode
       securityContext:
         privileged: true
